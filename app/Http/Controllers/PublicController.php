@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
     public function index(){
-        $variable = 'some value';
-        return view('index');
+        $videos = Video::all();
+        return view('index', compact('videos'));
     }
 
     public function page1(){

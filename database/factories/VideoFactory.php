@@ -16,8 +16,22 @@ class VideoFactory extends Factory
      */
     public function definition()
     {
+
+        $created = fake()->dateTimeBetween();
+        $updated = fake()->dateTimeBetween($created);
+        if(rand(0,3)){
+            $updated = $created;
+        }
+
+
         return [
-            //
+            'path' => 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4',
+            'title' => fake()->sentence,
+            'description' => fake()->paragraphs(3,true),
+            'thumbnail' => 'https://picsum.photos/seed/'. fake()->uuid .'/400/300',
+            'duration' => fake()->time,
+            'created_at' => $created,
+            'updated_at' => $updated,
         ];
     }
 }
