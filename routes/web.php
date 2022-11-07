@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PublicController::class, 'index']);
+Route::get('/', [PublicController::class, 'index'])->name('public.index');
+Route::get('/pages/page1', [PublicController::class, 'page1'])->name('public.page1');
+Route::get('/pages/page2', [PublicController::class, 'page2'])->name('public.page2');
 
 Auth::routes();
 

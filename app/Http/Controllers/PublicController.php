@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 class PublicController extends Controller
 {
     public function index(){
-        return 'hello';
+        $variable = 'some value';
+        return view('index');
+    }
+
+    public function page1(){
+        return view('page1');
+    }
+
+    public function page2(){
+        return view('page2');
     }
 }
