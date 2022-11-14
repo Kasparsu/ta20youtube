@@ -15,7 +15,8 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        $videos = Video::latest()->paginate();
+        return view('videos.index', compact('videos'));
     }
 
     /**
@@ -25,7 +26,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+        return view('videos.create');
     }
 
     /**
@@ -36,7 +37,7 @@ class VideoController extends Controller
      */
     public function store(StoreVideoRequest $request)
     {
-        //
+        dd($request->input());
     }
 
     /**

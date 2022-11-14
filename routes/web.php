@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PublicController::class, 'index'])->name('public.index');
+Route::get('/video/{video}', [PublicController::class, 'video'])->name('public.video');
+
+Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
+Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
+Route::post('/videos', [VideoController::class, 'store'])->name('videos.store');
+
+
 Route::get('/pages/page1', [PublicController::class, 'page1'])->name('public.page1');
 Route::get('/pages/page2', [PublicController::class, 'page2'])->name('public.page2');
 

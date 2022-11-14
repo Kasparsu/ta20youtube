@@ -15,6 +15,10 @@ class VideoSeeder extends Seeder
      */
     public function run()
     {
-        Video::factory(100)->create();
+        $videos = Video::factory(100)->make();
+        $videos = $videos->sortBy('created_at');
+        foreach ($videos as $video){
+            $video->save();
+        }
     }
 }

@@ -10,11 +10,9 @@
                     <a class="nav-link" aria-current="page" href="{{ route('public.index') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('public.page1') }}">Page1</a>
+                    <a class="nav-link" href="{{ route('videos.index') }}">Admin</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('public.page2') }}">Page2</a>
-                </li>
+
             </ul>
         </div>
     </div>

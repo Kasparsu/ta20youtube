@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PublicController extends Controller
 {
     public function index(){
-        $videos = Video::all();
+        $videos = Video::latest()->paginate(12);
         return view('index', compact('videos'));
+    }
+
+    public function video(Video $video){
+        return view('view', compact('video'));
     }
 
     public function page1(){
