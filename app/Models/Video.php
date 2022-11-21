@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['title', 'description', 'path', 'duration', 'thumbnail'];
 // old version
 //    public function getSnippetAttribute(){
 //        return substr($this->description,0,100);

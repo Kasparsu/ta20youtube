@@ -37,7 +37,17 @@ class VideoController extends Controller
      */
     public function store(StoreVideoRequest $request)
     {
-        dd($request->input());
+
+//        $video = new Video();
+//        $video->title = $request->validated('title');
+//        $video->description = $request->validated('description');
+//        $video->duration = $request->validated('duration');
+//        $video->path = $request->validated('path');
+//        $video->thumbnail = $request->validated('thumbnail');
+        $video = new Video($request->validated());
+        $video->save();
+        $request->session()->flash('status', 'Video added successfuly!');
+        return redirect()->route('videos.index');
     }
 
     /**
@@ -59,7 +69,7 @@ class VideoController extends Controller
      */
     public function edit(Video $video)
     {
-        //
+        return view('videos.edit', compact('video'));
     }
 
     /**
@@ -71,7 +81,10 @@ class VideoController extends Controller
      */
     public function update(UpdateVideoRequest $request, Video $video)
     {
-        //
+        $video->fill($request->validated());
+        $video->save();
+        $request->session()->flash('status', 'Video updated successfuly!');
+        return redirect()->route('videos.index');
     }
 
     /**
@@ -82,6 +95,8 @@ class VideoController extends Controller
      */
     public function destroy(Video $video)
     {
-        //
+        $video->delete();
+        request()->session()->flash('status', 'Video deleted successfuly!');
+        return redirect()->route('videos.index');
     }
 }

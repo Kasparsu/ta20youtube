@@ -24,7 +24,11 @@ class StoreVideoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'max:250'],
+            'description' => [],
+            'duration' => ['nullable', 'date_format:G:i'],
+            'thumbnail' => ['nullable', 'url'],
+            'path' => ['required', 'url']
         ];
     }
 }
