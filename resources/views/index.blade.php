@@ -13,7 +13,9 @@
                     <a href="{{route('public.video', ['video' => $video])}}" class="btn btn-primary">View</a>
                 </div>
                 <div class="card-footer text-muted">
-                    {{$video->created_at->diffForHumans()}}
+                    {{$video->user->name}}<br>
+                    {{$video->created_at->diffForHumans()}} <br>
+                    <b>Comments:</b> {{ $video->comments()->count() }}
                 </div>
             </div>
         </div>

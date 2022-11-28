@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class VideoSeeder extends Seeder
+class CommentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,12 +17,15 @@ class VideoSeeder extends Seeder
      */
     public function run()
     {
-        $videos = Video::factory(100)->make();
-        $videos = $videos->sortBy('created_at');
+        $videos = Video::all();
         $users = User::all();
         foreach ($videos as $video){
-            $video->user_id = $users->random()->id;
-            $video->save();
+            $comments = Comment::factory(rand(0, 20))->make();
+            foreach ($comments as $comment){
+                $comment->video_id = $video->id;
+                $comment->user_id = $users->random()->id;
+                $comment->save();
+            }
         }
     }
 }

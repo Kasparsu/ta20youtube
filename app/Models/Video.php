@@ -20,4 +20,12 @@ class Video extends Model
             return substr($this->description,0,100);
         });
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

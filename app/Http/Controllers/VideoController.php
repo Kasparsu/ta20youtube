@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Video;
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class VideoController extends Controller
 {
@@ -15,7 +18,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::latest()->paginate();
+        $videos = Auth::user()->videos()->latest()->paginate();
         return view('videos.index', compact('videos'));
     }
 
@@ -45,6 +48,7 @@ class VideoController extends Controller
 //        $video->path = $request->validated('path');
 //        $video->thumbnail = $request->validated('thumbnail');
         $video = new Video($request->validated());
+        $video->user()->associate(Auth::user());
         $video->save();
         $request->session()->flash('status', 'Video added successfuly!');
         return redirect()->route('videos.index');
@@ -69,6 +73,10 @@ class VideoController extends Controller
      */
     public function edit(Video $video)
     {
+
+        if($video->user->id !== Auth::user()->id){
+            throw new NotFoundHttpException();
+        }
         return view('videos.edit', compact('video'));
     }
 
@@ -81,6 +89,9 @@ class VideoController extends Controller
      */
     public function update(UpdateVideoRequest $request, Video $video)
     {
+        if($video->user->id !== Auth::user()->id){
+            throw new NotFoundHttpException();
+        }
         $video->fill($request->validated());
         $video->save();
         $request->session()->flash('status', 'Video updated successfuly!');
@@ -95,6 +106,9 @@ class VideoController extends Controller
      */
     public function destroy(Video $video)
     {
+        if($video->user->id !== Auth::user()->id){
+            throw new NotFoundHttpException();
+        }
         $video->delete();
         request()->session()->flash('status', 'Video deleted successfuly!');
         return redirect()->route('videos.index');
