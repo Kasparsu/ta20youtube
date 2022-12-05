@@ -15,6 +15,12 @@
                     </li>
                 @endauth
             </ul>
+            <form class="mx-auto w-50" role="search" action="" method="GET">
+                <div class="input-group">
+                    <input class="form-control" type="search" name="search" placeholder="Search" aria-label="Search" value="{{request()->query('search') ?? ''}}">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </div>
+            </form>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
